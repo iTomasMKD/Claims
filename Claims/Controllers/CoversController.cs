@@ -1,6 +1,5 @@
 using Claims.Auditing;
 using Claims.Helpers;
-using Claims.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 

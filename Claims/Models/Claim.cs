@@ -1,6 +1,4 @@
-﻿using MediaBrowser.Model.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using Newtonsoft.Json;
 
 namespace Claims.Models
 {
@@ -21,12 +19,9 @@ namespace Claims.Models
         [JsonProperty(PropertyName = "claimType")]
         public ClaimType Type { get; set; }
 
-        [MaxValue(100000)]
         [JsonProperty(PropertyName = "damageCost")]
         public decimal DamageCost { get; set; }
-
     }
-
     public enum ClaimType
     {
         Collision = 0,
