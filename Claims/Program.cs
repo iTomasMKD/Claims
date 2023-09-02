@@ -28,6 +28,7 @@ builder.Services.AddSingleton<Auditer>(provider =>
     var auditContext = provider.GetRequiredService<AuditContext>();
     return new Auditer(auditContext, serviceBusConnectionString, topicName);
 });
+builder.Services.AddTransient<ICosmosDbService, CosmosDbService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
