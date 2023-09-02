@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Claims.Validation;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Claims.Models
 {
@@ -11,6 +13,8 @@ namespace Claims.Models
         public string CoverId { get; set; }
 
         [JsonProperty(PropertyName = "created")]
+        [Required(ErrorMessage = "Created date is required.")]
+        [WithinCoverPeriod(ErrorMessage = "Created date must be within the period of the related Cover.")]
         public DateTime Created { get; set; }
 
         [JsonProperty(PropertyName = "name")]
@@ -20,6 +24,7 @@ namespace Claims.Models
         public ClaimType Type { get; set; }
 
         [JsonProperty(PropertyName = "damageCost")]
+        [Range(0, 100000, ErrorMessage = "DamageCost cannot exceed 100,000.")]
         public decimal DamageCost { get; set; }
     }
     public enum ClaimType

@@ -57,47 +57,47 @@ namespace Claims.Tests
         }
 
 
-        //[Fact]
-        //public async Task Get_Claim_Should_Return_Claim_When_Id_Exists()
-        //{
-        //    // Arrange
-        //    var application = new WebApplicationFactory<Program>()
-        //                          .WithWebHostBuilder(_ =>{ });
-        //    var client = application.CreateClient();
+        [Fact]
+        public async Task Get_Claim_Should_Return_Claim_When_Id_Exists()
+        {
+            // Arrange
+            var application = new WebApplicationFactory<Program>()
+                                  .WithWebHostBuilder(_ => { });
+            var client = application.CreateClient();
 
-        //    var mockContainer = new Mock<IContainer>();
-        //    var expectedClaim = new Claim { Id = "testId", /* other properties */ };
-        //    mockContainer.Setup(c => c.ReadItemAsync<Claim>(It.IsAny<string>(), It.IsAny<PartitionKey>()))
-        //                 .ReturnsAsync(new ItemResponse<Claim>(HttpStatusCode.OK, expectedClaim));
-        //    var controller = new ClaimsController(mockContainer.Object);
+            var mockContainer = new Mock<IContainer>();
+            var expectedClaim = new Claim { Id = "testId", /* other properties */ };
+            mockContainer.Setup(c => c.ReadItemAsync<Claim>(It.IsAny<string>(), It.IsAny<PartitionKey>()))
+                         .ReturnsAsync(new ItemResponse<Claim>(HttpStatusCode.OK, expectedClaim));
+            var controller = new ClaimsController(mockContainer.Object);
 
 
-        //    var result = await controller.GetClaimAsync("testId");
+            var result = await controller.GetClaimAsync("testId");
 
-        //    // Assert
-        //    Assert.NotNull(result);
-        //    Assert.Equal(expectedClaim, result);
-        //}
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(expectedClaim, result);
+        }
 
-        //[Fact]
-        //public async Task CreateAsync_Should_Return_OkResult_When_Claim_Is_Created()
-        //{
-        //    // Arrange
-        //    var mockCosmosDbService = new Mock<ICosmosDbService>();
-        //    var mockAuditer = new Mock<Auditer>();
-        //    var claim = new Claim { /* set properties except Id */ };
-        //    var controller = new ClaimsController(mockCosmosDbService.Object, mockAuditer.Object);
+        [Fact]
+        public async Task CreateAsync_Should_Return_OkResult_When_Claim_Is_Created()
+        {
+            // Arrange
+            var mockCosmosDbService = new Mock<ICosmosDbService>();
+            var mockAuditer = new Mock<Auditer>();
+            var claim = new Claim { /* set properties except Id */ };
+            var controller = new ClaimsController(mockCosmosDbService.Object, mockAuditer.Object);
 
-        //    // Act
-        //    var result = await controller.CreateAsync(claim);
+            // Act
+            var result = await controller.CreateAsync(claim);
 
-        //    // Assert
-        //    Assert.IsType<OkObjectResult>(result);
-        //    var okResult = result as OkObjectResult;
-        //    var returnedClaim = okResult.Value as Claim;
-        //    Assert.Equal(claim, returnedClaim);
-        //    mockCosmosDbService.Verify(m => m.AddItemAsync(It.IsAny<Claim>()), Times.Once);
-        //    mockAuditer.Verify(m => m.AuditClaim(It.IsAny<string>(), "POST"), Times.Once);
-        //}
+            // Assert
+            Assert.IsType<OkObjectResult>(result);
+            var okResult = result as OkObjectResult;
+            var returnedClaim = okResult.Value as Claim;
+            Assert.Equal(claim, returnedClaim);
+            mockCosmosDbService.Verify(m => m.AddItemAsync(It.IsAny<Claim>()), Times.Once);
+            mockAuditer.Verify(m => m.AuditClaim(It.IsAny<string>(), "POST"), Times.Once);
+        }
     }
 }

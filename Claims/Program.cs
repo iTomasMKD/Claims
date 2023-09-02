@@ -20,6 +20,15 @@ builder.Services.AddSingleton(
 
 builder.Services.AddDbContext<AuditContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Register the Auditer class with Azure Service Bus
+string serviceBusConnectionString = builder.Configuration.GetConnectionString("ServiceBus");
+string topicName = builder.Configuration["ServiceBus:TopicName"];
+builder.Services.AddSingleton<Auditer>(provider =>
+{
+    var auditContext = provider.GetRequiredService<AuditContext>();
+    return new Auditer(auditContext, serviceBusConnectionString, topicName);
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

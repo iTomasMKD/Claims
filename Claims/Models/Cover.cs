@@ -1,5 +1,4 @@
-﻿using MediaBrowser.Model.Dlna;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Claims.Validation;
 using Newtonsoft.Json;
 
 namespace Claims.Models
@@ -10,10 +9,12 @@ namespace Claims.Models
         public string Id { get; set; }
 
         [JsonProperty(PropertyName = "startDate")]
-        public DateOnly StartDate { get; set; }
+        [StartDateNotInPast(ErrorMessage = "StartDate cannot be in the past.")]
+        public DateTime StartDate { get; set; }
 
         [JsonProperty(PropertyName = "endDate")]
-        public DateOnly EndDate { get; set; }
+        [EndDateWithinOneYear(ErrorMessage = "Total insurance period cannot exceed 1 year.")]
+        public DateTime EndDate { get; set; }
 
         [JsonProperty(PropertyName = "claimType")]
         public CoverType Type { get; set; }
