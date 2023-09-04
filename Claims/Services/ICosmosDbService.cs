@@ -6,7 +6,7 @@ namespace Claims.Services
     {
        Task<IEnumerable<Claim>> GetClaimsAsync();
         Task<Claim> GetClaimAsync(string id);
-        public Task AddItemAsync(Claim item);
+       Task AddItemAsync(Claim item);
         Task DeleteItemAsync(string id);
     }
 }
