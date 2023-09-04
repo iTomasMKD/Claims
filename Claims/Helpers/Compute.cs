@@ -64,6 +64,26 @@ namespace Claims.Helpers
             return totalPremium;
         }
 
+        //i have this logic also using lambda but its hard to read for some junior etc
+        //public static decimal ComputePremium(DateOnly startDate, DateOnly endDate, CoverType coverType)
+        //{
+        //    var multiplier = GetMultiplier(coverType);
+        //    var premiumPerDay = 1250 * multiplier;
+        //    var insuranceLength = endDate.DayNumber - startDate.DayNumber;
+
+        //    var totalPremium = insuranceLength <= 30
+        //        ? ComputePremiumForFirst30Days(insuranceLength, premiumPerDay)
+        //        : insuranceLength <= 180
+        //            ? ComputePremiumForFirst30Days(30, premiumPerDay) +
+        //              ComputePremiumForNext150Days(insuranceLength - 30, premiumPerDay, coverType)
+        //            : ComputePremiumForFirst30Days(30, premiumPerDay) +
+        //              ComputePremiumForNext150Days(150, premiumPerDay, coverType) +
+        //              ComputePremiumForRemainingDays(insuranceLength - 180, premiumPerDay, coverType);
+
+        //    return totalPremium;
+        //}
+
+
         private static decimal GetMultiplier(CoverType coverType)
         {
             switch (coverType)
